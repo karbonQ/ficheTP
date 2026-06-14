@@ -64,9 +64,9 @@
             const worksheet = workbook.getWorksheet(1); 
 
             // 5. إسقاط البيانات في خلايا محددة (قم بتعديل الأحرف والأرقام لتطابق ملفك)
-            worksheet.getCell('B3').value = moduleVal;  // نضع اسم المادة في الخلية B3
-            worksheet.getCell('D3').value = hoursVal;   // نضع الحجم الساعي في الخلية D3
-            worksheet.getCell('B4').value = teacherVal; // نضع اسم الأستاذ في الخلية B4
+            worksheet.getCell('c3').value = moduleVal;  // نضع اسم المادة في الخلية B3
+            worksheet.getCell('D2').value = hoursVal;   // نضع الحجم الساعي في الخلية D3
+            worksheet.getCell('l1').value = teacherVal; // نضع اسم الأستاذ في الخلية B4
 
             // 6. توليد الملف الجديد وتحميله للمستخدم
             const buffer = await workbook.xlsx.writeBuffer();
