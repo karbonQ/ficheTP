@@ -1,128 +1,194 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تعبئة نموذج الإكسل الجاهز</title>
+    <title>ورقة تنقيط الأعمال التطبيقية</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f4f4f9; text-align: right; }
-        .container { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        input { width: 100%; padding: 10px; margin: 10px 0; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
-        button { width: 100%; padding: 12px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 15px; }
-        button:hover { background-color: #0056b3; }
+        
+        /* قمنا بتوسيع الحاوية لتستوعب العمودين براحة */
+        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #333; margin-bottom: 25px; }
+        
+        /* إعداد شبكة العرض (Grid) لتقسيم الشاشة */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* قسمين متساويين */
+            gap: 25px; /* الفراغ بين القسمين */
+        }
+        
+        /* تنسيق الصناديق الداخلية للقسمين */
+        .form-column {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .form-column h3 { margin-top: 0; color: #0056b3; font-size: 17px; border-bottom: 2px solid #ddd; padding-bottom: 8px; margin-bottom: 15px; }
+
+        label { display: block; margin-top: 10px; font-weight: bold; color: #555; font-size: 14px; }
+        input { width: 100%; padding: 9px; margin-top: 5px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; transition: 0.2s; }
+        input:focus { border-color: #007bff; outline: none; box-shadow: 0 0 5px rgba(0,123,255,0.3); }
+        
+        /* جعل الزر يأخذ العرض بالكامل أسفل الشبكة */
+        .submit-btn { width: 100%; padding: 14px; background-color: #28a745; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 18px; font-weight: bold; margin-top: 25px; transition: 0.3s; }
+        .submit-btn:hover { background-color: #218838; }
+
+        /* جعل التصميم متجاوباً مع الهواتف (يعود لعمود واحد إذا كانت الشاشة صغيرة) */
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h2>ورقة تنقيط الأعمال التطبيقية TP 📊</h2>
+    
     <form id="dataForm">
-        <label>اسم المتربص:</label>
-        <input type="text" id="inputStg" placeholder="أدخل اللقب و الاسم الكاملين" required>
-        <label>السداسي رقم:</label>
-        <input type="text" id="inputSem" placeholder="ادخل رقم السداسي الحالي" required>
-        <label>اسم الفرع:</label>
-        <input type="text" id="inputSec" placeholder="أدخل اسم التخصص" required>
-        <label>رقم الأسبوع :</label>
-        <input type="text" id="inputSema" >
-         <label>  رقم الدرس:</label>
-        <input type="text" id="inputCo" >
-        <label>تاريخ بداية الأسبوع :</label>
-        <input type="text" id="inputSd">
-        <label>تاريخ نهاية الأسبوع :</label>
-        <input type="text" id="inputSf">
- <label>الوقت المحدد :</label>
-        <input type="text" id="inputT">
-<label>العنصر1 من التمرين التطبيقي:</label>
-        <input type="text" id="inputE1">
-<label>العنصر2 من التمرين التطبيقي:</label>
-        <input type="text" id="inputE2">
-     <label>العنصر3 من التمرين التطبيقي:</label>
-        <input type="text" id="inputE3">
-     <label>العنصر4 من التمرين التطبيقي:</label>
-        <input type="text" id="inputE4">
-     <label>العنصر5 من التمرين التطبيقي:</label>
-        <input type="text" id="inputE5">
-     <label>العنصر6 من التمرين التطبيقي:</label>
-        <input type="text" id="inputE6">
-      <label>العنصر7 من التمرين التطبيقي:</label>
-        <input type="text" id="inputE7">
-      <label>العنصر8 من التمرين التطبيقي:</label>
-        <input type="text" id="inputE8">
-      <label>العنصر9 من التمرين التطبيقي:</label>
-        <input type="text" id="inputE9">
-      <label>العنصر10 من التمرين التطبيقي:</label>
-        <input type="text" id="inputE10">
-       <button type="button" onclick="modifyExistingExcel()">تسجيـــــــل    📥</button>
+        <div class="form-grid">
+            <div class="form-column">
+                <h3>معلومات المتربص والإطار الزمني</h3>
+                <label>اسم المتربص:</label>
+                <input type="text" id="inputStg" placeholder="أدخل اللقب و الاسم الكاملين" required>
+                
+                <label>السداسي رقم:</label>
+                <input type="text" id="inputSem" placeholder="ادخل رقم السداسي الحالي" required>
+                
+                <label>اسم الفرع:</label>
+                <input type="text" id="inputSec" placeholder="أدخل اسم التخصص" required>
+                
+                <label>رقم الأسبوع :</label>
+                <input type="text" id="inputSema">
+                
+                <label>رقم الدرس:</label>
+                <input type="text" id="inputCo">
+                
+                <label>تاريخ بداية الأسبوع :</label>
+                <input type="text" id="inputSd">
+                
+                <label>تاريخ نهاية الأسبوع :</label>
+                <input type="text" id="inputSf">
+                
+                <label>الوقت المحدد :</label>
+                <input type="text" id="inputT">
+            </div>
+
+            <div class="form-column">
+                <h3>عناصر التقييم (TP)</h3>
+                <label>العنصر 1 من التمرين التطبيقي:</label>
+                <input type="text" id="inputE1">
+                
+                <label>العنصر 2 من التمرين التطبيقي:</label>
+                <input type="text" id="inputE2">
+                
+                <label>العنصر 3 من التمرين التطبيقي:</label>
+                <input type="text" id="inputE3">
+                
+                <label>العنصر 4 من التمرين التطبيقي:</label>
+                <input type="text" id="inputE4">
+                
+                <label>العنصر 5 من التمرين التطبيقي:</label>
+                <input type="text" id="inputE5">
+                
+                <label>العنصر 6 من التمرين التطبيقي:</label>
+                <input type="text" id="inputE6">
+                
+                <label>العنصر 7 من التمرين التطبيقي:</label>
+                <input type="text" id="inputE7">
+                
+                <label>العنصر 8 من التمرين التطبيقي:</label>
+                <input type="text" id="inputE8">
+                
+                <label>العنصر 9 من التمرين التطبيقي:</label>
+                <input type="text" id="inputE9">
+                
+                <label>العنصر 10 من التمرين التطبيقي:</label>
+                <input type="text" id="inputE10">
+            </div>
+        </div>
+
+        <button type="button" class="submit-btn" onclick="modifyExistingExcel()">تسجيـــــــل وتحميل 📥</button>
     </form>
 </div>
+
 <script>
     async function modifyExistingExcel() {
+        // جلب البيانات من القسم الأول
         const StgVal = document.getElementById("inputStg").value;
         const SemVal = document.getElementById("inputSem").value;
         const SecVal = document.getElementById("inputSec").value;
         const SemaVal = document.getElementById("inputSema").value;
         const CoVal = document.getElementById("inputCo").value;
-       const SdVal = document.getElementById("inputSd").value;
+        const SdVal = document.getElementById("inputSd").value;
         const SfVal = document.getElementById("inputSf").value;
-     const TVal = document.getElementById("inputT").value;
-     const E1Val = document.getElementById("inputE1").value;
-     const E1Val = document.getElementById("inputE2").value;
-     const E1Val = document.getElementById("inputE3").value;
-     const E1Val = document.getElementById("inputE4").value;
-     const E1Val = document.getElementById("inputE5").value;
-     const E1Val = document.getElementById("inputE6").value;
-     const E1Val = document.getElementById("inputE7").value;
-     const E1Val = document.getElementById("inputE8").value;
-     const E1Val = document.getElementById("inputE9").value;
-     const E1Val = document.getElementById("inputE10").value;
+        const TVal = document.getElementById("inputT").value;
+        
+        // جلب البيانات من القسم الثاني (تم تصحيح أسماء المتغيرات هنا)
+        const E1Val = document.getElementById("inputE1").value;
+        const E2Val = document.getElementById("inputE2").value;
+        const E3Val = document.getElementById("inputE3").value;
+        const E4Val = document.getElementById("inputE4").value;
+        const E5Val = document.getElementById("inputE5").value;
+        const E6Val = document.getElementById("inputE6").value;
+        const E7Val = document.getElementById("inputE7").value;
+        const E8Val = document.getElementById("inputE8").value;
+        const E9Val = document.getElementById("inputE9").value;
+        const E10Val = document.getElementById("inputE10").value;
 
-        if(!StgVal || !SemVal || !SecVal ||  !SemaVal || !CoVal || !SdVal || !SfVal || !TVal || !E1Val || !E2Val || !E3Val|| !E4Val|| !E5Val|| !E6Val|| !E7Val|| !E8Val|| !E9Val|| !E10Val ) {
+        // التحقق من الحقول الإجبارية
+        if(!StgVal || !SemVal || !SecVal || !SemaVal || !CoVal || !SdVal || !SfVal || !TVal || !E1Val || !E2Val || !E3Val|| !E4Val|| !E5Val|| !E6Val|| !E7Val|| !E8Val|| !E9Val|| !E10Val ) {
             alert("الرجاء ملء جميع الحقول أولاً!");
             return;
         }
+
         try {
-            // جلب الملف مع إضافة تكتيك لمنع التخزين المؤقت (Cache البراوزر) لضمان جلب أحدث ملف
             const response = await fetch('template.xlsx?v=' + new Date().getTime());
-             // صمام الأمان: التحقق من أن الاستجابة ناجحة وليست صفحة 404
+            
             if (!response.ok) {
                 throw new Error("لم يتم العثور على ملف template.xlsx. تأكد من رفعه في نفس مسار index.html بنفس الاسم تماماً.");
             }
+            
             const arrayBuffer = await response.arrayBuffer();
             const workbook = new ExcelJS.Workbook();
             await workbook.xlsx.load(arrayBuffer);
-            // الطريقة الآمنة لفتح أول ورقة عمل (Sheet) في الملف
+            
             const worksheet = workbook.worksheets[0]; 
             if (!worksheet) {
                 throw new Error("الملف مفتوح ولكنه فارغ تماماً ولا يحتوي على أي ورقة عمل (Sheet).");
             }
-            // إسقاط البيانات في الخلايا (تأكد من مطابقة الرموز لملفك)
+            
+            // إسقاط البيانات في الخلايا الخاصة بملفك
             worksheet.getCell('D2').value = StgVal;  
             worksheet.getCell('H2').value = SemVal;   
             worksheet.getCell('C3').value = SecVal; 
-                 worksheet.getCell('M3').value = SemaVal;  
+            worksheet.getCell('M3').value = SemaVal;  
             worksheet.getCell('L15').value = CoVal;
-         worksheet.getCell('M11').value = SdVal; 
+            worksheet.getCell('M11').value = SdVal; 
             worksheet.getCell('M18').value = SfVal; 
-          worksheet.getCell('N27').value = TVal; 
-        worksheet.getCell('A7').value = E1Val; 
-         worksheet.getCell('A8').value = E2Val; 
-         worksheet.getCell('A9').value = E3Val; 
-         worksheet.getCell('A10').value = E4Val;
-         worksheet.getCell('A11').value = E5Val;
-         worksheet.getCell('A12').value = E6Val;
-         worksheet.getCell('A13').value = E7Val;
-         worksheet.getCell('A14').value = E8Val;
-         worksheet.getCell('A15').value = E9Val;
-         worksheet.getCell('A16').value = E10Val;
+            worksheet.getCell('N27').value = TVal; 
+            
+            worksheet.getCell('A7').value = E1Val; 
+            worksheet.getCell('A8').value = E2Val; 
+            worksheet.getCell('A9').value = E3Val; 
+            worksheet.getCell('A10').value = E4Val;
+            worksheet.getCell('A11').value = E5Val;
+            worksheet.getCell('A12').value = E6Val;
+            worksheet.getCell('A13').value = E7Val;
+            worksheet.getCell('A14').value = E8Val;
+            worksheet.getCell('A15').value = E9Val;
+            worksheet.getCell('A16').value = E10Val;
          
             // توليد وتحميل الملف النهائي
             const buffer = await workbook.xlsx.writeBuffer();
             const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-              const link = document.createElement('a');
+            const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = 'Document_Final.xlsx'; 
+            link.download = 'TP_Evaluation.xlsx'; 
             link.click();
+
         } catch (error) {
             alert("حدث خطأ أثناء المعالجة:\n" + error.message);
             console.error(error);
@@ -131,4 +197,3 @@
 </script>
 </body>
 </html>
-
