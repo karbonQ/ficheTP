@@ -31,6 +31,11 @@
         <input type="text" id="inputSd">
         <label>تاريخ نهاية الأسبوع :</label>
         <input type="text" id="inputSf">
+ <label>الوقت المحدد :</label>
+        <input type="text" id="inputT">
+<label>عناصر1 من التمرين التطبيقي:</label>
+        <input type="text" id="inputE1">
+     
        <button type="button" onclick="modifyExistingExcel()">تسجيـــــــل    📥</button>
     </form>
 </div>
@@ -43,8 +48,12 @@
         const CoVal = document.getElementById("inputCo").value;
        const SdVal = document.getElementById("inputSd").value;
         const SfVal = document.getElementById("inputSf").value;
+     const TVal = document.getElementById("inputT").value;
+const E1Val = document.getElementById("inputE1").value;
+     
+     
 
-        if(!StgVal || !SemVal || !SecVal ||  !SemaVal || !CoVal || !SdVal || !SfVal   ) {
+        if(!StgVal || !SemVal || !SecVal ||  !SemaVal || !CoVal || !SdVal || !SfVal || !TVal || !E1Val   ) {
             alert("الرجاء ملء جميع الحقول أولاً!");
             return;
         }
