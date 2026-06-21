@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
@@ -14,73 +14,83 @@
     </style>
 </head>
 <body>
-
 <div class="container">
-    <h2>تعبئة القالب الجاهز 📊</h2>
+    <h2>ورقة تنقيط الأعمال التطبيقية TP 📊</h2>
     <form id="dataForm">
-        <label>اسم المادة / المقياس:</label>
-        <input type="text" id="inputModule" placeholder="مثال: معلوماتية" required>
-
-        <label>الحجم الساعي الكامل:</label>
-        <input type="text" id="inputHours" placeholder="مثال: 238 ساعة" required>
-
-        <label>اسم الأستاذ / المكون:</label>
-        <input type="text" id="inputTeacher" placeholder="أدخل اسمك هنا" required>
-
-        <button type="button" onclick="modifyExistingExcel()">توليد الملف المنسق 📥</button>
+        <label>اسم المتربص:</label>
+        <input type="text" id="inputStg" placeholder="أدخل اللقب و الاسم الكاملين" required>
+        <label>السداسي رقم:</label>
+        <input type="text" id="inputSem" placeholder="ادخل رقم السداسي الحالي" required>
+        <label>اسم الفرع:</label>
+        <input type="text" id="inputSec" placeholder="أدخل اسم التخصص" required>
+        <label>رقم الأسبوع :</label>
+        <input type="text" id="inputSema" >
+         <label>  رقم الدرس:</label>
+        <input type="text" id="inputCo" >
+        <label>تاريخ بداية الأسبوع :</label>
+        <input type="text" id="inputSd">
+        <label>تاريخ نهاية الأسبوع :</label>
+        <input type="text" id="inputSf">
+       <button type="button" onclick="modifyExistingExcel()">تسجيـــــــل    📥</button>
     </form>
 </div>
-
 <script>
     async function modifyExistingExcel() {
-        const moduleVal = document.getElementById("inputModule").value;
-        const hoursVal = document.getElementById("inputHours").value;
-        const teacherVal = document.getElementById("inputTeacher").value;
+        const StgVal = document.getElementById("inputStg").value;
+        const SemVal = document.getElementById("inputSem").value;
+        const SecVal = document.getElementById("inputSec").value;
+        const SemaVal = document.getElementById("inputSema").value;
+        const CoVal = document.getElementById("inputCo").value;
+       const SdVal = document.getElementById("inputSd").value;
+        const SfVal = document.getElementById("inputSf").value;
 
-        if(!moduleVal || !hoursVal || !teacherVal) {
+
+
+
+
+
+     
+        if(!StgVal || !SemVal || !SecVal ||  !SemaVal || !CoVal || !SdVal || !SfVal   ) {
             alert("الرجاء ملء جميع الحقول أولاً!");
             return;
         }
-
         try {
             // جلب الملف مع إضافة تكتيك لمنع التخزين المؤقت (Cache البراوزر) لضمان جلب أحدث ملف
             const response = await fetch('template.xlsx?v=' + new Date().getTime());
-            
-            // صمام الأمان: التحقق من أن الاستجابة ناجحة وليست صفحة 404
+             // صمام الأمان: التحقق من أن الاستجابة ناجحة وليست صفحة 404
             if (!response.ok) {
                 throw new Error("لم يتم العثور على ملف template.xlsx. تأكد من رفعه في نفس مسار index.html بنفس الاسم تماماً.");
             }
-            
             const arrayBuffer = await response.arrayBuffer();
             const workbook = new ExcelJS.Workbook();
             await workbook.xlsx.load(arrayBuffer);
-
             // الطريقة الآمنة لفتح أول ورقة عمل (Sheet) في الملف
             const worksheet = workbook.worksheets[0]; 
             if (!worksheet) {
                 throw new Error("الملف مفتوح ولكنه فارغ تماماً ولا يحتوي على أي ورقة عمل (Sheet).");
             }
-
             // إسقاط البيانات في الخلايا (تأكد من مطابقة الرموز لملفك)
-            worksheet.getCell('B3').value = moduleVal;  
-            worksheet.getCell('D3').value = hoursVal;   
-            worksheet.getCell('B4').value = teacherVal; 
-
+            worksheet.getCell('D2').value = StgVal;  
+            worksheet.getCell('H2').value = SemVal;   
+            worksheet.getCell('C3').value = SecVal; 
+                 worksheet.getCell('M3').value = SemaVal;  
+            worksheet.getCell('L15').value = CoVal;
+         worksheet.getCell('N11').value = SdVal; 
+            worksheet.getCell('N18').value = SfVal; 
+       
             // توليد وتحميل الملف النهائي
             const buffer = await workbook.xlsx.writeBuffer();
             const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-            
-            const link = document.createElement('a');
+              const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
             link.download = 'Document_Final.xlsx'; 
             link.click();
-
         } catch (error) {
             alert("حدث خطأ أثناء المعالجة:\n" + error.message);
             console.error(error);
         }
     }
 </script>
-
 </body>
 </html>
+
