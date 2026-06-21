@@ -44,12 +44,6 @@
        const SdVal = document.getElementById("inputSd").value;
         const SfVal = document.getElementById("inputSf").value;
 
-
-
-
-
-
-     
         if(!StgVal || !SemVal || !SecVal ||  !SemaVal || !CoVal || !SdVal || !SfVal   ) {
             alert("الرجاء ملء جميع الحقول أولاً!");
             return;
@@ -75,8 +69,8 @@
             worksheet.getCell('C3').value = SecVal; 
                  worksheet.getCell('M3').value = SemaVal;  
             worksheet.getCell('L15').value = CoVal;
-         worksheet.getCell('N11').value = SdVal; 
-            worksheet.getCell('N18').value = SfVal; 
+         worksheet.getCell('M11').value = SdVal; 
+            worksheet.getCell('M18').value = SfVal; 
        
             // توليد وتحميل الملف النهائي
             const buffer = await workbook.xlsx.writeBuffer();
