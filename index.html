@@ -6,116 +6,161 @@
     <title>ورقة تنقيط الأعمال التطبيقية</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js"></script>
     <style>
-        body { font-family: 'CAIRO'; padding: 20px; background-color: #f4f4f9; text-align: right; }
+        /* التوسيط الكلي والخلفية العصرية */
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(135deg, #e0eafc, #cfdef3); /* خلفية متدرجة هادئة */
+            margin: 0; 
+            min-height: 100vh; /* أخذ طول الشاشة بالكامل */
+            display: flex; 
+            justify-content: center; /* التوسيط الأفقي */
+            align-items: center; /* التوسيط العمودي */
+            text-align: right; 
+        }
         
-        /* قمنا بتوسيع الحاوية لتستوعب العمودين براحة */
-        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: #333; margin-bottom: 25px; }
+        /* الصندوق الرئيسي (الواجهة) */
+        .container { 
+            width: 100%;
+            max-width: 750px; /* تصغير العرض ليكون مدمجاً */
+            background: rgba(255, 255, 255, 0.95); /* أبيض مع شفافية طفيفة جداً */
+            padding: 25px; 
+            border-radius: 12px; /* زوايا دائرية عصرية */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* ظل عصري وناعم */
+        }
+
+        h2 { text-align: center; color: #2c3e50; margin-top: 0; margin-bottom: 20px; font-size: 22px; }
         
-        /* إعداد شبكة العرض (Grid) لتقسيم الشاشة */
+        /* إعداد شبكة العرض (Grid) */
         .form-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* قسمين متساويين */
-            gap: 25px; /* الفراغ بين القسمين */
+            grid-template-columns: 1fr 1fr;
+            gap: 15px; /* تقليل المسافة بين العمودين لجعله أصغر */
         }
         
-        /* تنسيق الصناديق الداخلية للقسمين */
+        /* تنسيق الأقسام الداخلية */
         .form-column {
-            background: #fafafa;
-            padding: 20px;
-            border-radius: 6px;
-            border: 1px solid #e0e0e0;
+            background: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #eaebec;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
 
-        .form-column h3 { margin-top: 0; color: #0056b3; font-size: 17px; border-bottom: 2px solid #ddd; padding-bottom: 8px; margin-bottom: 15px; }
+        .form-column h3 { margin-top: 0; color: #34495e; font-size: 15px; border-bottom: 1px solid #eee; padding-bottom: 8px; margin-bottom: 10px; }
 
-        label { display: block; margin-top: 10px; font-weight: bold; color: #555; font-size: 14px; }
-        input { width: 100%; padding: 9px; margin-top: 5px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; transition: 0.2s; }
-        input:focus { border-color: #007bff; outline: none; box-shadow: 0 0 5px rgba(0,123,255,0.3); }
+        /* تنسيق الحقول والنصوص */
+        label { display: block; margin-top: 8px; font-weight: 600; color: #555; font-size: 13px; }
+        input { 
+            width: 100%; 
+            padding: 8px; 
+            margin-top: 4px; 
+            box-sizing: border-box; 
+            border: 1px solid #ccd1d9; 
+            border-radius: 6px; 
+            font-size: 13px;
+            transition: all 0.3s ease; 
+        }
+        input:focus { border-color: #3498db; outline: none; box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15); }
         
-        /* جعل الزر يأخذ العرض بالكامل أسفل الشبكة */
-        .submit-btn { width: 100%; padding: 14px; background-color: #28a745; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 18px; font-weight: bold; margin-top: 25px; transition: 0.3s; }
-        .submit-btn:hover { background-color: #218838; }
+        /* زر التحميل */
+        .submit-btn { 
+            width: 100%; 
+            padding: 12px; 
+            background: linear-gradient(135deg, #28a745, #218838); /* تأثير تدرج للزر */
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 16px; 
+            font-weight: bold; 
+            margin-top: 20px; 
+            transition: transform 0.2s, box-shadow 0.2s; 
+        }
+        .submit-btn:hover { 
+            transform: translateY(-2px); /* حركة خفيفة للأعلى عند مرور الماوس */
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3); 
+        }
 
-        /* جعل التصميم متجاوباً مع الهواتف (يعود لعمود واحد إذا كانت الشاشة صغيرة) */
-        @media (max-width: 768px) {
+        /* التجاوب مع الهواتف الذكية */
+        @media (max-width: 600px) {
             .form-grid { grid-template-columns: 1fr; }
+            .container { padding: 15px; max-width: 90%; border-radius: 8px; }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h2>ورقة تنقيط الأعمال التطبيقية TP </h2>
+    <h2>ورقة تنقيط الأعمال التطبيقية TP 📊</h2>
     
     <form id="dataForm">
         <div class="form-grid">
             <div class="form-column">
+                <h3>معلومات المتربص والإطار الزمني</h3>
                 <label>اسم المتربص:</label>
-                <input type="text" id="inputStg" placeholder="أدخل اللقب و الاسم الكاملين" required>
+                <input type="text" id="inputStg" placeholder="اللقب والاسم" required>
                 
                 <label>السداسي رقم:</label>
-                <input type="text" id="inputSem" placeholder="ادخل رقم السداسي الحالي" required>
+                <input type="text" id="inputSem" placeholder="رقم السداسي" required>
                 
                 <label>اسم الفرع:</label>
-                <input type="text" id="inputSec" placeholder="أدخل اسم التخصص" required>
+                <input type="text" id="inputSec" placeholder="اسم التخصص" required>
                 
-                <label>رقم الأسبوع :</label>
+                <label>رقم الأسبوع:</label>
                 <input type="text" id="inputSema">
                 
                 <label>رقم الدرس:</label>
                 <input type="text" id="inputCo">
                 
-                <label>تاريخ بداية الأسبوع :</label>
+                <label>تاريخ بداية الأسبوع:</label>
                 <input type="text" id="inputSd">
                 
-                <label>تاريخ نهاية الأسبوع :</label>
+                <label>تاريخ نهاية الأسبوع:</label>
                 <input type="text" id="inputSf">
                 
-                <label>الوقت المحدد :</label>
+                <label>الوقت المحدد:</label>
                 <input type="text" id="inputT">
             </div>
 
             <div class="form-column">
                 <h3>عناصر التقييم (TP)</h3>
-                <label>العنصر 1 من التمرين التطبيقي:</label>
+                <label>العنصر 1:</label>
                 <input type="text" id="inputE1">
                 
-                <label>العنصر 2 من التمرين التطبيقي:</label>
+                <label>العنصر 2:</label>
                 <input type="text" id="inputE2">
                 
-                <label>العنصر 3 من التمرين التطبيقي:</label>
+                <label>العنصر 3:</label>
                 <input type="text" id="inputE3">
                 
-                <label>العنصر 4 من التمرين التطبيقي:</label>
+                <label>العنصر 4:</label>
                 <input type="text" id="inputE4">
                 
-                <label>العنصر 5 من التمرين التطبيقي:</label>
+                <label>العنصر 5:</label>
                 <input type="text" id="inputE5">
                 
-                <label>العنصر 6 من التمرين التطبيقي:</label>
+                <label>العنصر 6:</label>
                 <input type="text" id="inputE6">
                 
-                <label>العنصر 7 من التمرين التطبيقي:</label>
+                <label>العنصر 7:</label>
                 <input type="text" id="inputE7">
                 
-                <label>العنصر 8 من التمرين التطبيقي:</label>
+                <label>العنصر 8:</label>
                 <input type="text" id="inputE8">
                 
-                <label>العنصر 9 من التمرين التطبيقي:</label>
+                <label>العنصر 9:</label>
                 <input type="text" id="inputE9">
                 
-                <label>العنصر 10 من التمرين التطبيقي:</label>
+                <label>العنصر 10:</label>
                 <input type="text" id="inputE10">
             </div>
         </div>
 
-        <button type="button" class="submit-btn" onclick="modifyExistingExcel()">تخزيــــــن </button>
+        <button type="button" class="submit-btn" onclick="modifyExistingExcel()">تسجيـــــــل وتحميل 📥</button>
     </form>
 </div>
 
 <script>
     async function modifyExistingExcel() {
-        // جلب البيانات من القسم الأول
         const StgVal = document.getElementById("inputStg").value;
         const SemVal = document.getElementById("inputSem").value;
         const SecVal = document.getElementById("inputSec").value;
@@ -125,7 +170,6 @@
         const SfVal = document.getElementById("inputSf").value;
         const TVal = document.getElementById("inputT").value;
         
-        // جلب البيانات من القسم الثاني (تم تصحيح أسماء المتغيرات هنا)
         const E1Val = document.getElementById("inputE1").value;
         const E2Val = document.getElementById("inputE2").value;
         const E3Val = document.getElementById("inputE3").value;
@@ -137,7 +181,6 @@
         const E9Val = document.getElementById("inputE9").value;
         const E10Val = document.getElementById("inputE10").value;
 
-        // التحقق من الحقول الإجبارية
         if(!StgVal || !SemVal || !SecVal || !SemaVal || !CoVal || !SdVal || !SfVal || !TVal || !E1Val || !E2Val || !E3Val|| !E4Val|| !E5Val|| !E6Val|| !E7Val|| !E8Val|| !E9Val|| !E10Val ) {
             alert("الرجاء ملء جميع الحقول أولاً!");
             return;
@@ -159,7 +202,6 @@
                 throw new Error("الملف مفتوح ولكنه فارغ تماماً ولا يحتوي على أي ورقة عمل (Sheet).");
             }
             
-            // إسقاط البيانات في الخلايا الخاصة بملفك
             worksheet.getCell('D2').value = StgVal;  
             worksheet.getCell('H2').value = SemVal;   
             worksheet.getCell('C3').value = SecVal; 
@@ -180,7 +222,6 @@
             worksheet.getCell('A15').value = E9Val;
             worksheet.getCell('A16').value = E10Val;
          
-            // توليد وتحميل الملف النهائي
             const buffer = await workbook.xlsx.writeBuffer();
             const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
             const link = document.createElement('a');
