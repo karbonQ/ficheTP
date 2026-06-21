@@ -80,7 +80,8 @@ const E1Val = document.getElementById("inputE1").value;
             worksheet.getCell('L15').value = CoVal;
          worksheet.getCell('M11').value = SdVal; 
             worksheet.getCell('M18').value = SfVal; 
-       
+          worksheet.getCell('N27').value = TVal; 
+        worksheet.getCell('A7').value = E1Val; 
             // توليد وتحميل الملف النهائي
             const buffer = await workbook.xlsx.writeBuffer();
             const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
