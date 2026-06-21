@@ -154,7 +154,7 @@
             </div>
         </div>
 
-        <button type="button" class="submit-btn" onclick="modifyExistingExcel()">تسجيـــــــل وتحميل 📥</button>
+        <button type="button" class="submit-btn" onclick="modifyExistingExcel()">تسجيـــــــل  </button>
     </form>
 </div>
 
@@ -168,7 +168,6 @@
         const SdVal = document.getElementById("inputSd").value;
         const SfVal = document.getElementById("inputSf").value;
         const TVal = document.getElementById("inputT").value;
-        
         const E1Val = document.getElementById("inputE1").value;
         const E2Val = document.getElementById("inputE2").value;
         const E3Val = document.getElementById("inputE3").value;
@@ -181,7 +180,7 @@
         const E10Val = document.getElementById("inputE10").value;
 
         if(!StgVal || !SemVal || !SecVal || !SemaVal || !CoVal || !SdVal || !SfVal || !TVal || !E1Val || !E2Val || !E3Val|| !E4Val|| !E5Val|| !E6Val|| !E7Val|| !E8Val|| !E9Val|| !E10Val ) {
-            alert("الرجاء ملء جميع الحقول أولاً!");
+            alert("الرجاء ملء جميع الحقول ...!");
             return;
         }
 
@@ -209,7 +208,6 @@
             worksheet.getCell('M11').value = SdVal; 
             worksheet.getCell('M18').value = SfVal; 
             worksheet.getCell('N27').value = TVal; 
-            
             worksheet.getCell('A7').value = E1Val; 
             worksheet.getCell('A8').value = E2Val; 
             worksheet.getCell('A9').value = E3Val; 
